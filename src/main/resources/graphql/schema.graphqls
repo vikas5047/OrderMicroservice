@@ -1,0 +1,186 @@
+type Mutation {
+    createBook(title: String, pages: Int, author: String): Book
+    addBook(book: BookInput!): Book
+    updateBook(id: ID!, book: BookInput!): Book
+    deleteBook(id: ID!): Book
+    createProduct(productInput:ProductInput):Product
+    createUser(userInput:UserInput):User
+    addToCart(cartInput:CartInput):Cart
+    createOrder(orderInput:OrderInput):OrderDetail
+    createAddress(addressInput:AddressInput):Address
+}
+
+type Query {
+    findAllBooks: [Book]
+    findBook(id: ID!): Book
+    allProducts:[Product]
+    getProduct(productId:Int):Product
+    allUser:[User]
+    getUser(userId:ID!):User
+    getEmailUser(emailId:String):User
+    getCart(userId:Int):CartResponse
+    getUserOrders(userId:Int):[OrderHeader]
+    getAllOrders(userId:Int):[OrderHeader]
+    getOrderDetail(orderId:Int):OrderDetail
+    getUserAllAddress(userId:Int):[Address]
+}
+
+type Book {
+    id: ID!
+    title: String
+    pages: Int
+    author: String
+    reviews: [Review]
+}
+
+type Review {
+    id: ID!
+    title: String
+    comment: String
+    book: Book
+}
+
+type Product{
+
+    productId:ID!
+    productName:String!
+    productImage:String
+    currency:String
+    listPrice:Float!
+    salesPrice:Float!
+    
+}
+
+type CartItem{
+
+    cartItemId:ID
+    cartId:String
+    productId:String
+    listPrice:Float
+    salesPrice:Float
+    quantity:Int
+    
+}
+
+type Cart{
+
+    cartId:ID!
+    items:[CartItem]
+    userId:String
+        
+}
+
+type CartResponse{
+
+    cartId:ID!
+    items:[CartItem]
+    userId:String
+    cartTotal:Float
+        
+}
+
+type OrderItem{
+
+    orderItemId:ID!
+    orderId:String
+    productId:String
+    currency:String
+    quantity:Int
+    salesPrice:Float
+    listPrice:Float
+    
+}
+
+type OrderHeader{
+
+    orderId:ID!
+    items:[OrderItem]
+    orderTotal:Float
+    userId:String
+    paymentMode:String
+    addressId:Int
+    orderDate:String
+    orderStatus:String
+}
+
+type OrderDetail{
+    orderId:ID!
+    items:[OrderItem]
+    orderTotal:Float
+    userId:String
+    paymentMode:String
+    user:User
+    orderDate:String
+    orderStatus:String
+}
+
+type User{
+
+    userId:ID!
+    userName:String
+    emailId:String
+    addresses:[Address]
+}
+
+type Address{
+    addressId:ID
+    userName:String
+    userAddress:String
+    city:String
+    state:String
+    pincode:String
+    contactNumber:String
+    
+}
+
+input BookInput {
+    title: String
+    pages: Int
+    author: String
+}
+
+input ProductInput{
+    productName:String
+    productImage:String
+    currency:String
+    listPrice:Float
+    salesPrice:Float
+}
+
+input CartItemInput{
+    productId:String
+    listPrice:Float
+    salesPrice:Float
+    quantity:Int
+}
+
+input CartInput{
+    items:[CartItemInput]
+    userId:Int
+}
+
+input AddressInput{
+    
+    userName:String
+    userAddress:String
+    city:String
+    state:String
+    pincode:String
+    contactNumber:String
+    userId:Int
+    
+}
+
+input UserInput{
+
+    userName:String
+    emailId:String
+    addresses:[AddressInput]
+}
+
+input OrderInput{
+    userId:Int
+    paymentMode:String
+	addressId:Int
+	
+}

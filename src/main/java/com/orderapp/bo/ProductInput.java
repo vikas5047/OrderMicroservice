@@ -2,6 +2,7 @@ package com.orderapp.bo;
 
 public class ProductInput {
 
+	private String productId;
 	private String productName;
 	private String productImage;
 	private String currency;
@@ -44,6 +45,13 @@ public class ProductInput {
 	public void setProductStock(String productStock) {
 		this.productStock = productStock;
 	}
+	public String getProductId() {
+		return productId;
+	}
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
 
+	
 	
 }

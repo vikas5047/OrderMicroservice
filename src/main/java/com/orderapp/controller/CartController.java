@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +38,7 @@ public class CartController {
 		 return cartService.getUserCart(cartreq.getUserId());
 	 }
 	 
+	 @CrossOrigin
 	 @QueryMapping("getCart")
 	 public CartResponse getCart(@Argument Long userId){
 		
@@ -49,6 +50,7 @@ public class CartController {
         return cartService.insert(cart);
     }
     
+    @CrossOrigin
     @MutationMapping("addToCart")
     public CartResponse addToCart(@Argument CartInput cartInput){
     	Cart cart = new Cart();
@@ -65,4 +67,11 @@ public class CartController {
     	cart.setCartItems(item);
         return cartService.insert(cart);
     }
+    
+    @CrossOrigin
+    @QueryMapping("clearCart")
+	 public String clearCart(@Argument Long userId){
+    	
+		 return cartService.deleteCart(userId);
+	 }
 }

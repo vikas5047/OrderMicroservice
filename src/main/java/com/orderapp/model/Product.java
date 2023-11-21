@@ -13,18 +13,18 @@ import jakarta.persistence.Table;
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long productId;
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private String productId;
 	private String productName;
 	private String productImage;
 	private double listPrice;
 	private double salesPrice;
 	private String productStock;
 	private String currency;
-	public Long getProductId() {
+	public String getProductId() {
 		return productId;
 	}
-	public void setProductId(Long productId) {
+	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 	public String getProductName() {

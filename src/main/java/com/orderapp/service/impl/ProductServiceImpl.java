@@ -1,7 +1,10 @@
 package com.orderapp.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.orderapp.bo.ProductResponse;
 import com.orderapp.model.Product;
@@ -27,5 +30,16 @@ public class ProductServiceImpl implements ProductService {
 		response.setProductStock(prod.getProductStock());
 		return response;
 	}
+	
+	@Override
+	public List<Product> getAllProduct() {
+		
+		List<Product> prods = productRep.findAll();
+		
+		return prods;
+	}
 
+	public Product getProductById(String productId){
+	     return productRep.findById(productId).orElse(new Product());
+	}
 }

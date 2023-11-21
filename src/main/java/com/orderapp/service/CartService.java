@@ -10,4 +10,5 @@ public interface CartService {
 	public CartResponse getUserCart(Long userId);
 	
 	public CartResponse insert(Cart cart);
+	public String deleteCart(Long userId);
 }

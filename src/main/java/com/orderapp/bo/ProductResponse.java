@@ -2,7 +2,7 @@ package com.orderapp.bo;
 
 public class ProductResponse {
 
-	private Long productId;
+	private String productId;
 	private String productName;
 	private String productImage;
 	private double listPrice;
@@ -11,10 +11,10 @@ public class ProductResponse {
 	private String currency;
 	private String success;
 	private String fail;
-	public Long getProductId() {
+	public String getProductId() {
 		return productId;
 	}
-	public void setProductId(Long productId) {
+	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 	public String getProductName() {

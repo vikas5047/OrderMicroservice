@@ -7,6 +7,6 @@ import com.orderapp.model.Product;
 
 
 
-public interface ProductRepo extends JpaRepository<Product,Long> {
+public interface ProductRepo extends JpaRepository<Product,String> {
 
 }

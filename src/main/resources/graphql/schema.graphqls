@@ -14,7 +14,7 @@ type Query {
     findAllBooks: [Book]
     findBook(id: ID!): Book
     allProducts:[Product]
-    getProduct(productId:Int):Product
+    getProduct(productId:String):Product
     allUser:[User]
     getUser(userId:ID!):User
     getEmailUser(emailId:String):User
@@ -23,6 +23,7 @@ type Query {
     getAllOrders(userId:Int):[OrderHeader]
     getOrderDetail(orderId:Int):OrderDetail
     getUserAllAddress(userId:Int):[Address]
+    clearCart(userId:Int):String
 }
 
 type Book {
@@ -140,6 +141,7 @@ input BookInput {
 }
 
 input ProductInput{
+    productId:String
     productName:String
     productImage:String
     currency:String

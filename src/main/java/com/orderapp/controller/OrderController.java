@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,12 +46,14 @@ public class OrderController {
 	  @Autowired
 	  OrderService orderService;
 	  
+	  @CrossOrigin
 	  @MutationMapping("createOrder")
 	  public OrderDetailResponse createOrder(@Argument OrderInput orderInput) {
 		  return orderService.createOrder(orderInput);
 	      
 	  
 	  }
+	  @CrossOrigin
 	  @QueryMapping("getUserOrders")
 	  public List<OrderResponse> getUserOrders(@Argument Long userId){
 		  
@@ -58,6 +61,7 @@ public class OrderController {
 	     return orders;
 	  }
 	  
+	  @CrossOrigin
 	  @QueryMapping("getOrderDetail")
 	  public OrderDetailResponse getOrderDetail(@Argument Long orderId){
 		  
@@ -65,6 +69,7 @@ public class OrderController {
 	     return order;
 	  }
 	  
+	  @CrossOrigin
 	  @QueryMapping("getAllOrders")
 	  public List<OrderResponse> getAllOrders(){
 		  
@@ -87,7 +92,7 @@ public class OrderController {
 	    			for(CartItem crtIt :cartToOrder.getCartItems()) {
 	    				
 	    				orderItem = new OrderItem();
-	    				Product prod = productRep.findById(Long.valueOf(crtIt.getProductId())).orElse(null);
+	    				Product prod = productRep.findById(crtIt.getProductId()).orElse(null);
 	    						
 	    						orderItem.setListPrice(""+prod.getListPrice());
 	    						orderItem.setSalesPrice(""+prod.getSalesPrice());
@@ -126,7 +131,7 @@ public class OrderController {
 			 for(OrderItem orderItem : orderItems) {
 			
 				 itmResp = new OrderItemResponse();
-				Product prod = productRep.findById(Long.valueOf(orderItem.getProductId())).orElse(null);
+				Product prod = productRep.findById(orderItem.getProductId()).orElse(null);
 				itmResp.setProductId(orderItem.getProductId());
 				itmResp.setProductName(prod.getProductName());
 				itmResp.setQuantity(orderItem.getQuantity());

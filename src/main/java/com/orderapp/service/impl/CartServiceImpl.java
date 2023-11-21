@@ -43,7 +43,7 @@ public class CartServiceImpl implements CartService {
 			 CartItemResponse itmResp = null;
 			 for(CartItem cartItmz :cartItm) {
 				 itmResp = new CartItemResponse();
-				Product prod = productRep.findById(Long.valueOf(cartItmz.getProductId())).orElse(null);
+				Product prod = productRep.findById(cartItmz.getProductId()).orElse(null);
 				itmResp.setCartItemId(cartItmz.getCartItemId());
 				itmResp.setProductId(cartItmz.getProductId());
 				itmResp.setProductName(prod.getProductName());
@@ -71,7 +71,7 @@ public class CartServiceImpl implements CartService {
 	    		if(cartItemsinDb!=null && cartItemsinDb.size()>0) {
 	    			for(CartItem crtIt :cartItemsinDb) {
 	    				for(CartItem reqItem : cart.getCartItems()) {
-	    					Product prod = productRep.findById(Long.valueOf(reqItem.getProductId())).orElse(null);
+	    					Product prod = productRep.findById(reqItem.getProductId()).orElse(null);
 	    					if(prod!=null) {
 	    					if(crtIt.getProductId().equals(reqItem.getProductId()) ) {
 	    						reqItem.setCartItemId(crtIt.getCartItemId());
@@ -89,7 +89,7 @@ public class CartServiceImpl implements CartService {
 	    	}else {
 	    		cartToSave = cart;
 	    		for(CartItem reqItem : cart.getCartItems()) {
-	    		Product prod = productRep.findById(Long.valueOf(reqItem.getProductId())).orElse(null);
+	    		Product prod = productRep.findById(reqItem.getProductId()).orElse(null);
 	    		if(prod!=null) {
 	    			reqItem.setListPrice(""+prod.getListPrice());
 					reqItem.setSalesPrice(""+prod.getSalesPrice());
@@ -105,7 +105,7 @@ public class CartServiceImpl implements CartService {
 			 double total = 0.0;
 			 for(CartItem cartItmz :cartItm) {
 				 itmResp = new CartItemResponse();
-				Product prod = productRep.findById(Long.valueOf(cartItmz.getProductId())).orElse(null);
+				Product prod = productRep.findById(cartItmz.getProductId()).orElse(null);
 				itmResp.setProductId(cartItmz.getProductId());
 				itmResp.setProductName(prod.getProductName());
 				itmResp.setQuantity(cartItmz.getQuantity());
@@ -120,4 +120,16 @@ public class CartServiceImpl implements CartService {
 			 response.setCartTotal(total);
 	        return response;
 	    }
+
+		@Override
+		public String deleteCart(Long userId) {
+			 List<Cart> cartList = cartRepoRepo.findByUserId(userId);
+		        //System.out.println(); .orElseThrow(() -> new RuntimeException("Book you are looking for not found on server !!"));;
+		 if(cartList!=null && cartList.size()>0) {
+			Cart cart = cartList.get(0);
+			 
+			cartRepoRepo.delete(cart);
+		 }
+			return "Success";
+		}
 }

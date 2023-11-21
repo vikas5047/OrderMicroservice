@@ -54,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
 	    			for(CartItem crtIt :cartToOrder.getCartItems()) {
 	    				
 	    				orderItem = new OrderItem();
-	    				Product prod = productRep.findById(Long.valueOf(crtIt.getProductId())).orElse(null);
+	    				Product prod = productRep.findById(crtIt.getProductId()).orElse(null);
 	    						
 	    						orderItem.setListPrice(""+prod.getListPrice());
 	    						orderItem.setSalesPrice(""+prod.getSalesPrice());
@@ -97,7 +97,7 @@ public class OrderServiceImpl implements OrderService {
 			 for(OrderItem orderItem : orderItems) {
 			
 				 itmResp = new OrderItemResponse();
-				Product prod = productRep.findById(Long.valueOf(orderItem.getProductId())).orElse(null);
+				Product prod = productRep.findById(orderItem.getProductId()).orElse(null);
 				itmResp.setProductId(orderItem.getProductId());
 				itmResp.setProductName(prod.getProductName());
 				itmResp.setQuantity(orderItem.getQuantity());
@@ -132,7 +132,7 @@ public class OrderServiceImpl implements OrderService {
 		 for(OrderItem orderItem : orderItems) {
 		
 			 itmResp = new OrderItemResponse();
-			Product prod = productRep.findById(Long.valueOf(orderItem.getProductId())).orElse(null);
+			Product prod = productRep.findById(orderItem.getProductId()).orElse(null);
 			itmResp.setProductId(orderItem.getProductId());
 			itmResp.setProductName(prod.getProductName());
 			itmResp.setQuantity(orderItem.getQuantity());
@@ -171,7 +171,7 @@ public class OrderServiceImpl implements OrderService {
 			 for(OrderItem orderItem : orderItems) {
 			
 				 itmResp = new OrderItemResponse();
-				Product prod = productRep.findById(Long.valueOf(orderItem.getProductId())).orElse(null);
+				Product prod = productRep.findById(orderItem.getProductId()).orElse(null);
 				itmResp.setProductId(orderItem.getProductId());
 				itmResp.setProductName(prod.getProductName());
 				itmResp.setQuantity(orderItem.getQuantity());

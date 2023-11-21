@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,6 +43,7 @@ public class UserController {
 		return userService.createUser(userReq);
     }
 	
+	@CrossOrigin
 	@MutationMapping("createUser")
     public UserResponse createUser(@Argument UserInput userInput){
 		User user = new User();
@@ -67,6 +69,7 @@ public class UserController {
 		return userService.createUser(user);
     }
 	
+	@CrossOrigin
 	@MutationMapping("createAddress") 
     public Address createAddress(@Argument AddressInput addressInput){
     	Address address = new Address();
@@ -82,6 +85,7 @@ public class UserController {
         return userService.createAddress(address);
     }
 	
+	@CrossOrigin
 	@QueryMapping("getUser")
     public UserResponse getUser(@Argument Long userId){
 		UserResponse response =null;
@@ -90,7 +94,7 @@ public class UserController {
 		return response;
     }
 	
-
+	@CrossOrigin
     @QueryMapping("getEmailUser")
     public UserResponse getEmailUser(@Argument String emailId) {
     
@@ -98,6 +102,7 @@ public class UserController {
     
     }
     
+    @CrossOrigin
     @QueryMapping("getUserAllAddress")
     public List<Address> getUserAllAddress(@Argument Long userId){
     	return userService.getUserAllAddress(userId);

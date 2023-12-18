@@ -1,0 +1,16 @@
+FROM mysql:latest
+
+# Set environment variables for MySQL
+ENV MYSQL_ROOT_PASSWORD root
+ENV MYSQL_DATABASE orderapi
+ENV MYSQL_USER root
+ENV MYSQL_PASSWORD root
+
+# Expose the port the MySQL server will run on
+EXPOSE 3306
+
+# Copy the SQL script to initialize the database
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Start MySQL server
+CMD ["mysqld"]
